@@ -4,11 +4,21 @@ let fs = require('fs')
 let path = require('path')
 let os = require('os')
 
-function scanDir(dir) {
-  fs.readdirSync(dir).forEach(file => scanPath(path.join(dir, file)))
+let skipFiles = {
+  node_modules: '',
+  '.git': '',
+  data: '',
+  dist: '',
+  build: '',
 }
 
-function scanPath(file) {
+function scanDir(dir) {
+  fs.readdirSync(dir).forEach(file => scanPath(dir, file))
+}
+
+function scanPath(dir, filename) {
+  if (filename in skipFiles) return
+  let file = path.join(dir, filename)
   let stats = fs.lstatSync(file)
   if (stats.isDirectory()) {
     return scanDir(file)
@@ -28,8 +38,12 @@ function scanFile(file) {
     console.error('Failed to parse file:', file)
     return
   }
-  if (text === newText) return
+  if (text === newText) {
+    console.log('skip file:', file)
+    return
+  }
   fs.writeFileSync(file, newText)
+  console.log('saved file:', file)
 }
 
 scanDir('.')
