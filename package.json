@@ -1,12 +1,31 @@
 {
   "name": "format-json-cli",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "format json file as post-hook to fix prettier",
+  "keywords": [
+    "format",
+    "prettier",
+    "cli"
+  ],
+  "author": {
+    "name": "Beeno Tung",
+    "email": "aabbcc1241@yahoo.com.hk",
+    "url": "https://beeno-tung.surge.sh"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "license": "BSD-2-Clause",
+  "bin": {
+    "format-json-cli": "cli.js"
+  },
+  "files": [
+    "cli.js"
+  ],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beenotung/format-json-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beenotung/format-json-cli/issues"
+  },
+  "homepage": "https://github.com/beenotung/format-json-cli#readme"
 }
