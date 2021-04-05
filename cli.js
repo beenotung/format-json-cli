@@ -10,6 +10,8 @@ let skipFiles = {
   'data': '',
   'dist': '',
   'build': '',
+  '.nyc_output': '',
+  'coverage': '',
 }
 
 function scanDir(dir) {
