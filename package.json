@@ -19,7 +19,13 @@
   "files": [
     "cli.js"
   ],
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write .",
+    "postformat": "node cli.js"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/beenotung/format-json-cli.git"

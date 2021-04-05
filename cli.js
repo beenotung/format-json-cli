@@ -5,11 +5,11 @@ let path = require('path')
 let os = require('os')
 
 let skipFiles = {
-  node_modules: '',
+  'node_modules': '',
   '.git': '',
-  data: '',
-  dist: '',
-  build: '',
+  'data': '',
+  'dist': '',
+  'build': '',
 }
 
 function scanDir(dir) {
