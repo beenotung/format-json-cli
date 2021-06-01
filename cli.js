@@ -30,12 +30,33 @@ function scanPath(dir, filename) {
   }
 }
 
+function isObject(o) {
+  return o && typeof o === 'object'
+}
+
+function compare(a, b) {
+  return a < b ? -1 : a > b ? 1 : 0
+}
+
+function sortObject(object, key) {
+  let o = object[key]
+  if (!isObject(o)) {
+    return
+  }
+  o = Object.fromEntries(Object.entries(o).sort((a, b) => compare(a[0], b[0])))
+  object[key] = o
+}
+
 function scanFile(file) {
   if (path.extname(file) !== '.json') return
   let text = fs.readFileSync(file).toString()
   let newText
   try {
-    newText = JSON.stringify(JSON.parse(text), null, 2) + os.EOL
+    let json = JSON.parse(text)
+    sortObject(json, 'dependencies')
+    sortObject(json, 'devDependencies')
+    sortObject(json, 'peerDependencies')
+    newText = JSON.stringify(json, null, 2) + os.EOL
   } catch (error) {
     console.error('Failed to parse file:', file)
     return
