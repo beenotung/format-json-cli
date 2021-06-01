@@ -20,6 +20,7 @@
     "cli.js"
   ],
   "scripts": {
+    "test": "node cli.js",
     "format": "prettier --write .",
     "postformat": "node cli.js"
   },
