@@ -53,9 +53,11 @@ function scanFile(file) {
   let newText
   try {
     let json = JSON.parse(text)
-    sortObject(json, 'dependencies')
-    sortObject(json, 'devDependencies')
-    sortObject(json, 'peerDependencies')
+    if (isObject(json)) {
+      sortObject(json, 'dependencies')
+      sortObject(json, 'devDependencies')
+      sortObject(json, 'peerDependencies')
+    }
     newText = JSON.stringify(json, null, 2) + os.EOL
   } catch (error) {
     console.error('Failed to parse file:', file)
