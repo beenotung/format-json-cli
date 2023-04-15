@@ -12,6 +12,7 @@ let skipFiles = {
   'build': '',
   '.nyc_output': '',
   'coverage': '',
+  '.angular': '',
 }
 
 function scanDir(dir) {
