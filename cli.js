@@ -15,13 +15,28 @@ let skipFiles = {
   '.angular': '',
 }
 
+let skipPaths = {}
+if (fs.existsSync('.prettierignore')) {
+  let text = fs.readFileSync('.prettierignore').toString()
+  let lines = text.split('\n')
+  for (let line of lines) {
+    line = line.trim()
+    if (line.startsWith('#')) continue
+    line = line.replace(/^\//, '').replace(/\/$/, '')
+    if (!line) continue
+    skipPaths[line] = ''
+  }
+}
+
 function scanDir(dir) {
   fs.readdirSync(dir).forEach(file => scanPath(dir, file))
 }
 
 function scanPath(dir, filename) {
   if (filename in skipFiles) return
+  if (filename in skipPaths) return
   let file = path.join(dir, filename)
+  if (file in skipPaths) return
   let stats = fs.lstatSync(file)
   if (stats.isDirectory()) {
     return scanDir(file)
